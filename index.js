@@ -15,8 +15,8 @@ let browserLang = (navigator.language || navigator.userLanguage).substr(0, 2);
 let vue = new Vue({
     el: '#app',
     data: {
-        message: 'fuck!',
-        response: '15'
+        message: 'Press enter',
+        response: null
     },
     methods: {
         send(){
@@ -26,14 +26,14 @@ let vue = new Vue({
 
             Vue.http.get('request-dummy.json', {params: {data: this.message}}).then(function(response){
                 console.dir(response);
-                that.response = JSON.stringify(response.body);
-                return Vue.nextTick();
-            }).then(function(){
-                return minWait;
-            }).then(function(){
-                $('#pleaseWaitDialog').modal('hide');
-                return Vue.nextTick();
-            })
+                return Vue.nextTick().then(function(){
+                    return minWait;
+                }).then(function(){
+                    $('#pleaseWaitDialog').modal('hide');
+                    that.response = JSON.stringify(response.body);
+                    return Vue.nextTick();
+                });
+            });
         }
     }
 });

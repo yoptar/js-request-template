@@ -34,7 +34,8 @@
                 <div class="col" id="AppContainer">
                     <div id="app" style="visibility: hidden;">
                         <form v-on:submit.prevent="send">
-                            <input v-model="message">
+                            <input v-model="message"><br/>
+                            <input type="submit">
                         </form>
                         <div>{{response}}</div>
                     </div>
